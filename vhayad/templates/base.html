@@ -1,12 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %}vhayad{% endblock %}</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+	{% block head %} {% endblock %}
+	<title>{% block title %}Vhayad{% endblock %}</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'vahaysite/style.css' %}">
 </head>
 <body>
-	{% block body %}
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-	{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$('.carousel').carousel()
+	</script>
+
+	{% block load_js %}{% endblock %}
+
 </body>
 </html>

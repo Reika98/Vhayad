@@ -2,8 +2,6 @@
 
 {% block body %}
 
-	<h1>Homepage</h1>
-
 	{% for vahay in vahays %}
 		<p><a href="{% url 'vahay:vahay_details' vahay.pk %}">{{ vahay }}</a></p>
 	{% endfor %}
