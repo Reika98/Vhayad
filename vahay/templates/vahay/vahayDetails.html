@@ -39,32 +39,32 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-6">
-							<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;Favorites: <span class="badge">{{ vahay.vote }}</span></p>
+							<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<strong>Favorites:</strong> <span class="badge">{{ vahay.vote }}</span></p>
 						</div>
 						<div class="col-md-3 col-md-offset-3">
-							<p><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;{{ reviews.count }} review/s</p>
+							<p><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;{{ reviews.count }} <strong>review/s</strong></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Owner: {{ vahay.getOwner }}</p>
+							<p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<strong>Owner:</strong> {{ vahay.getOwner }}</p>
 						</div>
 						<div class="col-md-3 col-md-offset-3">
   							{% if vahay.isAvailable %}
-							  <p style="color:green;">Now Available&nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></p>
+							  <p style="color:green;"><strong>Now Available</strong>&nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></p>
 							{% else %}
-							  <p style="color:red;">Not Available&nbsp;<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></p>
+							  <p style="color:red;"><strong>Not Available</strong>&nbsp;<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></p>
 							{% endif %}
   						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<p><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Category: {{ vahay.category.upper }}</p>
+							<p><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;<strong>Category:</strong> {{ vahay.category.upper }}</p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<p><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;Rent(Php): {{ vahay.rent }}</p>
+							<p><span class="glyphicon glyphicon-usd" aria-hidden="true"></span>&nbsp;<strong>Rent:</strong> Php {{ vahay.rent }}.00</p>
 						</div>
 						<div class="col-md-2 col-md-offset-3">
 							{% if vahay.owner == user %}
@@ -72,14 +72,14 @@
 							{% else %}
 							  <form action="{% url 'vahay:vote_vahay' vahay.pk %}?next={{ request.path }}" method="POST">
 									{% csrf_token %}
-									<button class="btn btn-sm btn-primary">Favorite&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+									<button class="btn btn-sm btn-primary"><strong>Favorite</strong>&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
 							  </form>
 							{% endif %}
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;Contact details: {{ vahay.contact_details }}</p>
+							<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;<strong>Contact details:</strong> {{ vahay.contact_details }}</p>
 						</div>
 						<div class="col-md-2 col-md-offset-3">
 							{% if vahay.owner == user %}
@@ -92,17 +92,17 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<p><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Address: {{ vahay.address }}</p>
+							<p><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;<strong>Address:</strong> {{ vahay.address }}</p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<p><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>&nbsp;Other Details: <em>{{ vahay.description }}</em>
+							<p><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>&nbsp;<strong>Other Details:</strong> <em>{{ vahay.description }}</em>
 						</div>
 					</div>
 					<div class="row">	
-						<div class="col-md-4">
-							<p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{ vahay.email }}</p>
+						<div class="col-md-6">
+							<p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;<strong>Email:</strong> {{ vahay.email }}</p>
 						</div>
 					</div>
 				</div>

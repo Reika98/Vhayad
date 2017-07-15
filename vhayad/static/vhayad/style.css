@@ -46,6 +46,11 @@
 	font-size: 1em;
 }
 
+.manage_vahay p{
+	font-family: 'Roboto Slab', serif;
+	font-size: 1em;
+}
+
 .manage_vahay .panel{
 	margin-top: 50px;
 }
@@ -144,4 +149,9 @@ footer {
 	top: 450px;
 	color: white;
 	padding-left: 50px;
+}
+
+.resident{
+	font-family: 'Roboto Slab', serif;
+	font-size: 1em;
 }
