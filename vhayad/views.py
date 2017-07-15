@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
@@ -18,13 +18,15 @@ def home(request):
 		user = authenticate(username=username, password=password)
 
 		if user:
-			print "dir"
 			login(request, user)
 			return render(request, 'vhayad/homepage.html', context=context)
-
 		else:
-			print	"or dir"
 			context['error_message'] = 'Invalid username or password'
 			context['username'] = username
 
 	return render(request, 'vhayad/signin.html', context=context)
+
+def sign_out(request):
+	logout(request)
+	return redirect('/')
+
