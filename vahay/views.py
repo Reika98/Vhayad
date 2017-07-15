@@ -37,6 +37,36 @@ def add_vahay(request):
 	return render(request, 'vahay/addVahay.html')
 
 
+def edit_vahay(request, pk):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
+	vahay = get_object_or_404(Vahay, pk=pk)
+	context = {
+		'vahay': vahay
+	}
+
+	if request.method == "POST":
+		vahay.name = request.POST.get('vahay_name')
+		vahay.rent_range = request.POST.get('rent_range')
+		vahay.category = request.POST.get('category')
+		vahay.contact_details = request.POST.get('contacts')
+		vahay.address = request.POST.get('address')
+		vahay.description = request.POST.get('description')
+		if request.POST.get('available', None) == None:
+			vahay.available = 0
+		else:
+			vahay.available = 1
+
+		vahay.save()
+		if request.POST['image_link']:
+			image_link = request.POST.get('image_link')
+			Image.objects.create(vahay=vahay, link=image_link)
+		return render(request, 'vahay/vahayDetails.html', context)
+
+	return render(request, 'vahay/editVahay.html', context=context)
+
+
 def get_list_vahay(request):
 
 	# list_vahay = serializers.serialize('json', Vahay.objects.all())

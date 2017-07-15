@@ -1,0 +1,147 @@
+.navbar{
+	border-radius: 0;
+	/*background-color: green;*/
+}
+
+.navbar-brand{
+	font-family: 'Satisfy', cursive;
+}
+
+#vahay_carousel{
+	width: 725px;
+}
+
+#vahay_carousel-inner{
+	max-height: 400px !important;
+}
+
+.item img {
+  width:100%;
+}
+
+.edit_vahay{
+	margin-top: 50px;
+}
+
+.add_vahay{
+	margin-top: 50px;
+}
+
+.info p{
+	font-size: 1.1em;
+}
+
+.vahay_title h3{
+	font-family: 'Roboto Slab', serif;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.profile_info .panel{
+	margin-top: 50px;
+}
+
+.profile_info p{
+	font-family: 'Roboto Slab', serif;
+	font-size: 1em;
+}
+
+.manage_vahay .panel{
+	margin-top: 50px;
+}
+
+.manage_vahay h4, .profile_info h4{
+	font-family: 'Roboto Slab', serif;
+	text-align: center;
+	font-size: 1.6em;
+}
+
+.login{
+	position: absolute;
+	top:200px;
+}
+
+.signup{
+	position: absolute;
+	top:150px;
+}
+
+.title{
+	position: absolute;
+	font-family: 'Satisfy', cursive;
+	font-size: 5em;
+	top: 250px;
+	color: white;
+	padding-left: 50px;
+}
+
+.login_label{
+	font-family: 'Roboto Slab', serif;
+	font-size: 1.7em;
+	color: white;
+	padding: 10px;
+}
+
+.signup_label{
+	font-family: 'Roboto Slab', serif;
+	font-size: 1.7em;
+	color: white;
+	padding: 10px;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #f2f2f2;
+}
+
+.carousel,
+.item,
+.active {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+.result_header p{
+	font-family: 'Roboto Slab', serif;
+	font-size: 1.8em;
+	text-align: center;
+	margin-top: 40px;
+	padding: 10px;
+}
+
+.result_details{
+	font-family: 'Roboto Slab', serif;
+	font-size: 1.1em;
+}
+
+.slogan{
+	position: absolute;
+	font-family: 'Roboto Slab', serif;
+	font-size: 2em;
+	top: 450px;
+	color: white;
+	padding-left: 50px;
+}

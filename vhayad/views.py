@@ -13,7 +13,7 @@ def home(request):
 	if request.user.is_authenticated:
 		vahays =  request.user.vahay_set.all()
 		context['vahays'] = vahays
-		return render(request, 'vhayad/homepage.html', context=context)
+		return render(request, 'homepage.html', context=context)
 
 	if request.method == 'POST':
 		username = request.POST['username']
@@ -27,7 +27,7 @@ def home(request):
 			context['error_message'] = 'Invalid username or password'
 			context['username'] = username
 
-	return render(request, 'vhayad/signin.html', context=context)
+	return render(request, 'signin.html', context=context)
 
 
 def sign_out(request):

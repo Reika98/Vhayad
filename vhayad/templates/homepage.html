@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Homepage</title>
-</head>
-<body>
-	<h1>Homepage</h1>
+{% extends 'base.html' %}
+
+{% block body %}
 
 	{% for vahay in vahays %}
 		<p><a href="{% url 'vahay:vahay_details' vahay.pk %}">{{ vahay }}</a></p>
@@ -13,5 +9,5 @@
 	<a href="{% url 'vahay:add_vahay' %}">Add Vahay</a>
 
 	<a href="{% url 'sign_out' %}">Sign out</a>
-</body>
-</html>
+
+{% endblock %}

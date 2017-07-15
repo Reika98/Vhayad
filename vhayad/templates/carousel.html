@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}Vahay{% endblock %}</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'vhayad/style.css' %}">
+</head>
+	
+	<div id="myCarousel" class="carousel slide">
+     <div class="carousel-inner">
+         <div class="item active">
+				<div class="fill">
+					<img src="{% static 'vhayad/background/5.png' %}" alt="image">
+				</div>
+         </div>
+         <div class="item">
+             <div class="fill">
+					<img src="{% static 'vhayad/background/4.png' %}" alt="image">
+				</div>
+         </div>
+			<div class="item">
+				<div class="fill">
+					<img src="{% static 'vhayad/background/1.png' %}" alt="image">
+				</div>
+			</div>
+     	</div>
+   </div>
+
+   {% block content %}
+   {% endblock %}
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+		$('.carousel').carousel()
+	</script>
+
+</body>
+</html>

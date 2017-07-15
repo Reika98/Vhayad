@@ -1,0 +1,32 @@
+{% extends 'carousel.html' %}
+	
+{% block title %}Vhayad-Sign in{% endblock %}
+	
+{% block content %}
+   <div class="title col-lg-6 col-lg-offset-2">
+   	<p>Vhayad</p>
+   </div>
+
+	<div class="login col-lg-3 col-lg-offset-5">
+		<div class="login_label">Login</div>
+		<form class="form-horizontal" action="{% url 'home' %}" method="POST">
+			{% csrf_token %}
+			<div class="form-group">
+				<input type="text" class="form-control" name="username" value="{{ user.username }}" placeholder="username">
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" name="password" placeholder="password">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Sign in</button><span style="color:white;"> or</span>
+				<a href="#" class="btn btn-success">Sign up here</a>
+			</div>
+			<div style="color:white;">
+				<em>{{ error_message }}</em>
+			</div>	
+	   </form>
+   </div>
+
+   <div class="slogan col-lg-6 col-lg-offset-4">
+   </div>
+{% endblock %}
