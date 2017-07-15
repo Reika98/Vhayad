@@ -2,21 +2,22 @@
 {% block title %}{{ resident.name }}{% endblock %}
 
 {% block body %}
-	<section class="residents">
+	<section class="resident" style="margin-top:50px;">
 	  <div class="panel panel-default col-lg-6 col-lg-offset-3">
-		<h3 style="text-align:center;">Residents Profile</h3>
+		<h3 style="text-align:center;">Resident's Profile</h3>
 			<div class="panel-body">
 				<div class="container-fluid">
 					<div class="well col-lg-12">
-						<p>Name: {{ resident.name }}</p>
-						<p>Age: {{ resident.age }}</p>
-						<p>Occupation: {{ resident.occupation }}</p>
-						<p>Email: {{ resident.email }}</p>
+						<p><strong>Name:</strong> {{ resident.name }}</p>
+						<p><strong>Age:</strong> {{ resident.age }}</p>
+						<p><strong>Occupation:</strong> {{ resident.occupation }}</p>
+						<p><strong>Home Address:</strong> {{ resident.home_address }}</p>
+						<p><strong>Email:</strong> {{ resident.email }}</p>
+						<p><strong>Amount to pay:</strong> Php {{ payment.amount }}.00</p>
 					</div>
 				</div>
 			</div>
-
-		<a href="#" class="btn btn-success col-lg-offset-5" style="margin-bottom: 15px;">Go back</a>
+		<a href="{% url 'vahay:vahay_details' resident.vahay.pk %}" class="btn btn-success col-lg-offset-5" style="margin-bottom: 15px;"><span class="glyphicon glyphicon-chevron-left"></span>Go back</a>
 		</div>
 	</section>
 	

@@ -95,3 +95,10 @@ class Resident(models.Model):
 		return {
 			"account_num" : self.account_num,
 		}	
+
+
+class Payment(models.Model):
+	vahay = models.ForeignKey(Vahay, on_delete=models.CASCADE)
+	resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
+	amount = models.IntegerField(default=0)
+

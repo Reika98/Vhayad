@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Vahay, Resident, Transaction
-from .models import Image
+from .models import Image, Payment
 from django.core import serializers
 
 import payment
@@ -95,8 +95,10 @@ def delete_resident(request, pk):
 
 def resident_profile(request, pk):
 	resident = get_object_or_404(Resident, pk=pk)
+	payment = get_object_or_404(Payment, resident=resident)
 	context = {
-		'resident': resident
+		'resident': resident,
+		'payment': payment
 	}
 
 	return render(request, 'vahay/residentProfile.html', context=context)
@@ -104,9 +106,7 @@ def resident_profile(request, pk):
 
 def reservations(request):
 	return render(request, 'vahay/reservations.html')
-
 	
-
 
 def get_list_reservation(request, pk):
 	
