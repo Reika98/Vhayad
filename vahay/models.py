@@ -86,7 +86,7 @@ class Resident(models.Model):
 	home_address = models.CharField(max_length=100)
 	email = models.CharField(max_length=100)
 	account_num = models.IntegerField(default=0)
-	vahay = models.ForeignKey(Vahay, on_delete=models.CASCADE)
+	vahay = models.ForeignKey(Vahay, on_delete=models.CASCADE, blank=True)
 
 	def __str__(self):
 		return self.name;

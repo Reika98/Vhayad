@@ -177,9 +177,10 @@ def m_get_vahay(request, pk):
 
 
 def reserve_vahay(request):
-
-	sender_name = request.POST.get('email')
-
+	if request.method == "POST":
+		sender_name = request.POST.get('email')
+		print request.POST.get('email')
+	print "HUHU"
 	result = Resident.objects.filter(email=sender_name)
 	sender = [ obj.account_as_json() for obj in result ]
 	sender_id = sender[0]['id']
