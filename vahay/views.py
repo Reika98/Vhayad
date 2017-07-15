@@ -109,11 +109,16 @@ def reserve_vahay(request):
 	sender = request.POST.get('username')
 
 	result = Resident.objects.filter(username=sender)
-	sender = [ obj.account_as_json() for obj in result ]
-	sender_account = sender[0]['account_num']
+	# sender = [ obj.account_as_json() for obj in result ]
+	# sender_id = sender[0]['account_num']
 
-	recipient = rsender[0]['owner']
+	recipient = sender[0]['owner']
+	# result1 = vahay.models.Vahay.objects.filter(owner=recipient)
+	# recipient = [ obj.account_as_json() for obj in result ]
+	# recipient_id = recipient[0]['account_num']
+
 	trans_type = 'reserve'
+	remarks = ''
 
 	new_transaction = Transaction.objects.create(sender=sender,recipient=recipient,trans_type=trans_type,remarks=remarks)
 	return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
