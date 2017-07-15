@@ -9,10 +9,10 @@ from django.contrib.auth.models import User
 class Vahay(models.Model):
 	owner = models.ForeignKey(User, on_delete=models.CASCADE)
 	name = models.CharField(max_length=255)
+	rent_range = models.CharField(max_length=100)
 	category = models.CharField(max_length=100)
 	contact_details = models.CharField(max_length=100)
-	rent_range = models.CharField(max_length=100)
-	rate = models.IntegerField(default=0)
+	vote = models.IntegerField(default=0)
 	available = models.BooleanField(default=1)
 	description = models.CharField(max_length=500)
 	address = models.CharField(max_length=500)
