@@ -8,11 +8,11 @@
 }
 
 #vahay_carousel{
-	width: 725px;
+	max-width: 725px !important;
 }
 
 #vahay_carousel-inner{
-	max-height: 400px !important;
+	max-height: 300px !important;
 }
 
 .item img {
@@ -28,7 +28,7 @@
 }
 
 .info p{
-	font-size: 1.1em;
+	font-size: 1em;
 }
 
 .vahay_title h3{
