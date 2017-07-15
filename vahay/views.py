@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Vahay
+from .models import Vahay, Resident, Transaction
 from django.core import serializers
 import json
 
@@ -90,7 +90,6 @@ def get_list_vahay(request):
 	return HttpResponse(json.dumps({"houses": list_vahay}), content_type='application/json')
 
 
-
 def m_get_vahay(request, pk):
 
 	# list_vahay = serializers.serialize('json', Vahay.objects.all())
@@ -101,3 +100,17 @@ def m_get_vahay(request, pk):
 	# return HttpResponse(list_vahay, content_type="application/json")
 	vahay = [ obj.details_as_json() for obj in list_obj ]
 	return HttpResponse(json.dumps({"houses": vahay}), content_type='application/json')
+
+
+def reserve_vahay(request):
+	sender = request.POST.get('username')
+
+	result = Resident.objects.filter(username=sender)
+	sender = [ obj.account_as_json() for obj in result ]
+	sender_account = sender[0]['account_num']
+
+	recipient = rsender[0]['owner']
+	trans_type = 'reserve'
+
+	new_transaction = Transaction.objects.create(sender=sender,recipient=recipient,trans_type=trans_type,remarks=remarks)
+	return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')

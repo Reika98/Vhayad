@@ -9,17 +9,22 @@ from django.contrib.auth.models import User
 
 conn = http.client.HTTPSConnection("api-uat.unionbankph.com")
 
-def pay(request):
+def pay(sender,recipient,amount):
 
 	# info = json.loads(request.body)
 	# source_account = info['resident_account']
 	# amount = info['amount_due']
 
-	result = vahay.models.Vahay.objects.filter(owner='3')
-	recipient = [ obj.account_as_json() for obj in result ]
+	result1 = vahay.models.Vahay.objects.filter(owner=sender)
+	sender = [ obj.account_as_json() for obj in result1 ]
+	sender_account = sender[0]['account_num']
+
+	result2 = vahay.models.Vahay.objects.filter(pk=recipient)
+	recipient = [ obj.account_as_json() for obj in result2 ]
 	recipient_account = recipient[0]['account_num']
 
-	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"003\",\"source_account\":\"101828352677\",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":10}"
+
+	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"003\",\"source_account\":"+source_account+",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":"+amount+"}"
 
 	headers = {
 
