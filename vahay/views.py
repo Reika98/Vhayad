@@ -103,13 +103,9 @@ def resident_profile(request, pk):
 	}
 
 	return render(request, 'vahay/residentProfile.html', context=context)
-
-
-def reservations(request):
-	return render(request, 'vahay/reservations.html')
 	
 
-def get_list_reservation(request, pk):
+def reservations(request, pk):
 	
 	if not request.user.is_authenticated:
 		return redirect('/')
@@ -118,7 +114,7 @@ def get_list_reservation(request, pk):
 	context = {
 		'reservations': list_obj
 	}
-	return redirect('/')
+	return render(request, 'vahay/reservations.html')
 
 
 def approve_reservation(request, pk):
