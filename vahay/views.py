@@ -107,6 +107,10 @@ def approve_reservation(request, pk):
 		transaction.save()
 		response = payment.bank.pay(transaction.recipient,transaction.sender)
 
+		resident = get_object_or_404(Vahay, pk=transaction.sender)
+		resident.vahay = transaction.recipient
+		resident.save()
+
 	return redirect('/')
 
 
@@ -150,13 +154,13 @@ def m_get_vahay(request, pk):
 
 def reserve_vahay(request):
 
-	sender_name = request.POST.get('username')
+	sender_name = request.POST.get('email')
 
-	result = Resident.objects.filter(username=sender_name)
+	result = Resident.objects.filter(email=sender_name)
 	sender = [ obj.account_as_json() for obj in result ]
 	sender_id = sender[0]['id']
 
-	recipient = sender[0]['owner']
+	recipient = request.POST.get('vahayId')
 	# result1 = vahay.models.Vahay.objects.filter(owner=recipient)
 	# recipient = [ obj.account_as_json() for obj in result ]
 	# recipient_id = recipient[0]['account_num']
@@ -192,7 +196,10 @@ def cancel_reservation(request, pk):
 	if request.method == 'POST':
 		transaction.trans_type = 'cancelled'
 		transaction.save()
+		print "GET cancel reservation"
 		return HttpResponse(json.dumps({'success':'cancelled'}), content_type='application/json')
 
-	print "GET cancel reservation"
-	return redirect('/')
+
+def sign_in(request):
+
+	transaction = get_object_or_404(Transaction, pk=pk)
