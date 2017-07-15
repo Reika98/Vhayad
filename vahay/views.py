@@ -108,7 +108,20 @@ def approve_reservation(request, pk):
 		transaction.trans_type = 'approved'
 		transaction.save()
 
-	response = payment.bank.pay(transaction.recipient,transaction.sender,)
+	response = payment.bank.pay(transaction.recipient,transaction.sender)
+
+	return redirect('/')
+
+
+def deny_reservation(request, pk):
+
+	if not request.user.is_authenticated:
+		return redirect('/')
+
+	transaction = get_object_or_404(Transaction, pk=pk)
+	if request.method == 'POST':
+		transaction.trans_type = 'denied'
+		transaction.save()
 
 	return redirect('/')
 
@@ -140,11 +153,11 @@ def m_get_vahay(request, pk):
 
 def reserve_vahay(request):
 
-	sender = request.POST.get('username')
+	sender_name = request.POST.get('username')
 
-	result = Resident.objects.filter(username=sender)
-	# sender = [ obj.account_as_json() for obj in result ]
-	# sender_id = sender[0]['account_num']
+	result = Resident.objects.filter(username=sender_name)
+	sender = [ obj.account_as_json() for obj in result ]
+	sender_id = sender[0]['id']
 
 	recipient = sender[0]['owner']
 	# result1 = vahay.models.Vahay.objects.filter(owner=recipient)
@@ -154,6 +167,33 @@ def reserve_vahay(request):
 	trans_type = 'reserve'
 	remarks = ''
 
-	print "RESERVE vahay"
+	print "POST reservation"
 	new_transaction = Transaction.objects.create(sender=sender,recipient=recipient,trans_type=trans_type,remarks=remarks)
 	return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
+
+
+def pay_rental(request):
+
+	sender_name = request.POST.get('username')
+
+	result = Resident.objects.filter(username=sender_name)
+	sender = [ obj.account_as_json() for obj in result ]
+	sender_id = sender[0]['id']
+
+	recipient = sender[0]['owner']
+	trans_type = 'payment'
+	remarks = ''
+
+	print "POST payment"
+	response = payment.bank.pay(transaction.recipient,transaction.sender)
+
+
+def cancel_reservation(request, pk):
+
+	transaction = get_object_or_404(Transaction, pk=pk)
+	if request.method == 'POST':
+		transaction.trans_type = 'cancelled'
+		transaction.save()
+
+	return redirect('/')
+
