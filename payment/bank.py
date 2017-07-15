@@ -35,8 +35,3 @@ def pay(request):
 	sample = { 'json': 'waaaaa'}
 
 	return HttpResponse(json.dumps(data), content_type="application/json")
-
-
-def get_account_num(request):
-
-	
