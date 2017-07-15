@@ -61,14 +61,6 @@
 						<div class="col-md-6">
 							<p><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Category: {{ vahay.category.upper }}</p>
 						</div>
-						<div class="col-md-2 col-md-offset-3">
-							{% if vahay.owner == user %}
-								<form action="#" method="POST">
-									{% csrf_token %}
-									<button type="submit" class="btn btn-xs btn-danger">Delete</button>
-								</form>
-							{% endif %}
-						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
@@ -89,6 +81,14 @@
 						<div class="col-md-6">
 							<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;Contact details: {{ vahay.contact_details }}</p>
 						</div>
+						<div class="col-md-2 col-md-offset-3">
+							{% if vahay.owner == user %}
+								<form action="#" method="POST">
+									{% csrf_token %}
+									<button type="submit" class="btn btn-xs btn-danger">Delete</button>
+								</form>
+							{% endif %}
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -98,6 +98,11 @@
 					<div class="row">
 						<div class="col-md-6">
 							<p><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>&nbsp;Other Details: <em>{{ vahay.description }}</em>
+						</div>
+					</div>
+					<div class="row">	
+						<div class="col-md-4">
+							<p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{ vahay.email }}</p>
 						</div>
 					</div>
 				</div>
