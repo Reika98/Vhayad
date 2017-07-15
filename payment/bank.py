@@ -9,7 +9,11 @@ conn = http.client.HTTPSConnection("api-uat.unionbankph.com")
 
 def pay(request):
 
-	payload = {"channel_id":"VHAYAD","transaction_id":"002","source_account":"101828352677","source_currency":"PHP","target_account":"101366553205","target_currency":"PHP","amount":888}
+	info = json.loads(request.body)
+	source_account = info['resident_account']
+	amount = info['amount_due']
+
+	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"002\",\"source_account\":\"101828352677\",\"source_currency\":\"PHP\",\"target_account\":\"101366553205\",\"target_currency\":\"PHP\",\"amount\":888}"
 
 	headers = {
 
@@ -29,4 +33,4 @@ def pay(request):
 
 	sample = { 'json': 'waaaaa'}
 
-	return HttpResponse(json.dumps(sample), content_type="application/json")
+	return HttpResponse(json.dumps(data), content_type="application/json")
