@@ -83,7 +83,7 @@
 						</div>
 						<div class="col-md-2 col-md-offset-3">
 							{% if vahay.owner == user %}
-								<form action="#" method="POST">
+								<form action="{% url 'vahay:delete_vahay' vahay.pk %}" method="POST">
 									{% csrf_token %}
 									<button type="submit" class="btn btn-xs btn-danger">Delete</button>
 								</form>
@@ -108,6 +108,24 @@
 				</div>
 				</div>
 		  </div>
+	</section>
+
+	<section class="residents">
+	  <div class="panel panel-default col-lg-6 col-lg-offset-3">
+		<h3 style="text-align:center;">Residents</h3>
+			<div class="panel-body">
+				<div class="container-fluid">
+					<ul class="list-group">
+						{% for resident in residents %}
+						  <li class="list-group-item" style="padding-bottom:15px;">{{ resident.name }} - {{ resident.age }} yr/s old
+						  <a href="{% url 'vahay:delete_resident' resident.pk %}" style="float:right;" class="btn btn-sm btn-danger">delete</a>
+						  <a href="{% url 'vahay:resident_profile' resident.pk %}" style="float:right;" class="btn btn-sm btn-success">view</a>
+						  </li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
 	</section>
 
 {% endblock %}

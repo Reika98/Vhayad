@@ -17,9 +17,11 @@ def vahay_details(request, pk):
 
 	vahay = get_object_or_404(Vahay, pk=pk)
 	images = Image.objects.filter(vahay=vahay)
+	residents = Resident.objects.filter(vahay=vahay)
 	context = {
 		'vahay': vahay,
-		'images': images
+		'images': images,
+		'residents': residents
 	}
 	return render(request, 'vahay/vahayDetails.html', context=context)
 
@@ -82,6 +84,28 @@ def delete_vahay(request, pk):
 	vahay.delete()
 
 	return redirect('/')
+
+
+def delete_resident(request, pk):
+	resident = get_object_or_404(Resident, pk=pk)
+	resident.delete()
+
+	return redirect('/')
+
+
+def resident_profile(request, pk):
+	resident = get_object_or_404(Resident, pk=pk)
+	context = {
+		'resident': resident
+	}
+
+	return render(request, 'vahay/residentProfile.html', context=context)
+
+
+def reservations(request):
+	return render(request, 'vahay/reservations.html')
+
+	
 
 
 def get_list_reservation(request, pk):
