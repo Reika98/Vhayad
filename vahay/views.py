@@ -82,3 +82,16 @@ def get_list_vahay(request):
 	# return HttpResponse(list_vahay, content_type="application/json")
 	list_vahay = [ obj.main_as_json() for obj in list_obj ]
 	return HttpResponse(json.dumps({"houses": list_vahay}), content_type='application/json')
+
+
+
+def m_get_vahay(request, pk):
+
+	# list_vahay = serializers.serialize('json', Vahay.objects.all())
+	list_obj = Vahay.objects.filter(pk=pk)
+	# vahays = [obj.as_json() for obj in list_obj]
+	
+	print "GET vahay"
+	# return HttpResponse(list_vahay, content_type="application/json")
+	vahay = [ obj.details_as_json() for obj in list_obj ]
+	return HttpResponse(json.dumps({"houses": vahay}), content_type='application/json')
