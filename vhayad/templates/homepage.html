@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Homepage</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block body %}
+
 	<h1>Homepage</h1>
 
 	{% for vahay in vahays %}
@@ -13,5 +11,5 @@
 	<a href="{% url 'vahay:add_vahay' %}">Add Vahay</a>
 
 	<a href="{% url 'sign_out' %}">Sign out</a>
-</body>
-</html>
+
+{% endblock %}

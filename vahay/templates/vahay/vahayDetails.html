@@ -10,7 +10,8 @@
 	<p>Category: {{ vahay.category }}</p>
 	<p>Contact Details: {{ vahay.contact_details }}</p>
 	<p>Rent-Range: {{ vahay.rent_range }}</p>
-	<p>Votes: {{ vahay.vote }}</p>
+	<p>Rate: {{ vahay.vote }}</p>
+	<p>Email: {{ vahay.email }}</p>
 	<p>Description: {{ vahay.description }}</p>
 	<p>Address: {{ vahay.address }}</p>
 
@@ -19,5 +20,7 @@
 	{% else %}
 		<p>Not Available</p>
 	{% endif %}
+
+	<a href="{% url 'vahay:edit_vahay' %}">Edit vahay</a>
 </body>
 </html>
