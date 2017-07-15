@@ -3,6 +3,6 @@ from 	. 					import 	bank
 
 urlpatterns = [
 
-	url(r'^pay/', bank.pay),
+	url(r'^pay/$', bank.pay),
 
 ]
