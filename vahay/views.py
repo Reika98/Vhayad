@@ -111,6 +111,8 @@ def reservations(request, pk):
 		return redirect('/')
 
 	list_obj = Transaction.objects.filter(trans_type='reserve').filter(recipient=pk)
+	print list_obj.as_json
+	# sender = get_object_or_404(Resident, pk=list_obj.)
 	context = {
 		'reservations': list_obj
 	}

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.shortcuts import get_object_or_404
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -77,6 +77,12 @@ class Transaction(models.Model):
 
 	def __str__(self):
 		return str(self.id)
+
+	def as_json(self):
+		return {
+			"resident" : get_object_or_404(Resident, pk=self.sender),
+			"vahay" : get_object_or_404(Vahay, pk=self.recipient)
+		}
 
 
 class Resident(models.Model):

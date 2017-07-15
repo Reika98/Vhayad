@@ -11,7 +11,7 @@ urlpatterns = [
 	url(r'^delete-vahay/(?P<pk>\d+)/$', views.delete_vahay, name='delete_vahay'),
 	url(r'^residents/delete-resident/(?P<pk>\d+)/$', views.delete_resident, name='delete_resident'),
 	url(r'^residents/profile/(?P<pk>\d+)/$', views.resident_profile, name='resident_profile'),
-	url(r'^reservations/$', views.reservations, name='reservations'),
+	url(r'^reservations/(?P<pk>\d+)/$', views.reservations, name='reservations'),
 
 	# url(r'^delete-vahay/(?P<pk>\d+)/$', views.delete_vahay, name='delete_vahay
 	url(r'^approve/(?P<pk>\d+)/$', views.approve_reservation, name='approve_reservation'),
