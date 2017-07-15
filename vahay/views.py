@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Vahay, Resident, Transaction
 from .models import Image
 from django.core import serializers
+
+import payment
 import json
 
 # Create your views here.
@@ -82,13 +84,31 @@ def delete_vahay(request, pk):
 	return redirect('/')
 
 
-# def get_list_reservation(request):
+def get_list_reservation(request):
+	
+	if not request.user.is_authenticated:
+		return redirect('/')
 
-# 	list_obj = Transaction.objects.all()
-# 	context = {
-# 		'reservations': list_obj,
-# 	}
-# 	return render(request, 'vahay/vahayDetails.html', context=context)
+	list_obj = Transaction.objects.all()
+	context = {
+		'reservations': list_obj,
+	}
+	return redirect('/')
+
+
+def approve_reservation(request, pk):
+
+	if not request.user.is_authenticated:
+		return redirect('/')
+
+	transaction = get_object_or_404(Transaction, pk=pk)
+	if request.method == 'POST':
+		transaction.trans_type = 'approved'
+		transaction.save()
+
+	response = payment.bank.pay(transaction.recipient,transaction.sender,)
+
+	return redirect('/')
 
 
 #MOBILE
