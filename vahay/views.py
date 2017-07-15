@@ -45,5 +45,5 @@ def get_list_vahay(request):
 	
 	print "GET list_vahay"
 	# return HttpResponse(list_vahay, content_type="application/json")
-	dictionaries = [ obj.as_dict() for obj in self.get_queryset() ]
-	return HttpResponse(json.dumps({"data": dictionaries}), content_type='application/json')
+	list_vahay = [ obj.main_as_json() for obj in list_obj ]
+	return HttpResponse(json.dumps({"houses": list_vahay}), content_type='application/json')

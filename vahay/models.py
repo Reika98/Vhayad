@@ -30,9 +30,12 @@ class Vahay(models.Model):
 	def getOwner(self):
 		return self.owner.last_name + ", " + self.owner.first_name
 
-	def convert_json(self):
+	def main_as_json(self):
 		return {
-			"owner" : self.owner.first_name
+			"id" : self.id,
+			"name"	: self.name,
+			"address": self.address,
+			"vote" : self.vote
 			}
 
 
