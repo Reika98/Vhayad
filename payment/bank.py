@@ -1,20 +1,24 @@
 import 		http.client
 import 		json
+import		vahay
 
-from 		django.shortcuts 			import 		render, reverse, redirect
-from 		django.http 				import 		HttpResponse
-from 		django.contrib.auth.models 	import 		User
+from django.shortcuts import render, reverse, redirect
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 
 conn = http.client.HTTPSConnection("api-uat.unionbankph.com")
 
 def pay(request):
 
-	info = json.loads(request.body)
-	source_account = info['resident_account']
-	amount = info['amount_due']
+	# info = json.loads(request.body)
+	# source_account = info['resident_account']
+	# amount = info['amount_due']
 
-	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"002\",\"source_account\":\"101828352677\",\"source_currency\":\"PHP\",\"target_account\":\"101366553205\",\"target_currency\":\"PHP\",\"amount\":888}"
+	account_num = vahay.models.Vahay.objects.filter(name='rafelle')
+	print account_num
+
+	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"004\",\"source_account\":\"101828352677\",\"source_currency\":\"PHP\",\"target_account\":"+account_num+",\"target_currency\":\"PHP\",\"amount\":10}"
 
 	headers = {
 

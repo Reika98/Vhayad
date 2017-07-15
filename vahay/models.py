@@ -17,6 +17,7 @@ class Vahay(models.Model):
 	description = models.CharField(max_length=500)
 	address = models.CharField(max_length=500)
 	email = models.CharField(max_length=500,default="example@email.com")
+	account_num = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.name + " - " + self.owner.username
@@ -30,9 +31,12 @@ class Vahay(models.Model):
 	def getOwner(self):
 		return self.owner.last_name + ", " + self.owner.first_name
 
-	def convert_json(self):
+	def main_as_json(self):
 		return {
-			"owner" : self.owner.first_name
+			"id" : self.id,
+			"name"	: self.name,
+			"address": self.address,
+			"vote" : self.vote
 			}
 
 
@@ -60,6 +64,7 @@ class Resident(models.Model):
 	occupation = models.CharField(max_length=100)
 	home_address = models.CharField(max_length=100)
 	email = models.CharField(max_length=100)
+	account_num = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.name;
