@@ -12,7 +12,7 @@ class Vahay(models.Model):
 	category = models.CharField(max_length=100)
 	contact_details = models.CharField(max_length=100)
 	rent_range = models.CharField(max_length=100)
-	vote = models.IntegerField(default=0)
+	rate = models.IntegerField(default=0)
 	available = models.BooleanField(default=1)
 	description = models.CharField(max_length=500)
 	address = models.CharField(max_length=500)
@@ -47,3 +47,4 @@ class Transaction(models.Model):
 
 	def __str__(self):
 		return self.id
+
