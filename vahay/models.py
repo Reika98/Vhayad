@@ -39,6 +39,26 @@ class Vahay(models.Model):
 			"vote" : self.vote
 			}
 
+	def details_as_json(self):
+		return {
+			"id" : self.id,
+			"owner" : self.owner.first_name + " " + self.owner.last_name,
+			"name" : self.name,
+			"rent_range": self.rent_range,
+			"category" : self.category,
+			"contact_details" : self.contact_details,
+			"available" : self.available,
+			"description" : self.description,
+			"email" : self.email, 	
+			"address" : self.address,
+			"vote" : self.vote
+			}
+
+	def account_as_json(self):
+		return {
+			"account_num" : self.account_num,
+		}	
+
 
 class Image(models.Model):
 	vahay = models.ForeignKey(Vahay, on_delete=models.CASCADE)
