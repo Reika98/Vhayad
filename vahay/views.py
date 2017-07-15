@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Vahay
 from django.core import serializers
 import json
@@ -12,7 +12,11 @@ def vahay_details(request, pk):
 	if not request.user.is_authenticated:
 		return redirect('/')
 
-	return render(request, 'vahay/vahayDetails.html')
+	vahay = get_object_or_404(Vahay, pk=pk)
+	context = {
+		'vahay': vahay
+	}
+	return render(request, 'vahay/vahayDetails.html', context=context)
 
 
 def add_vahay(request):
