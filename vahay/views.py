@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Vahay
-
+from django.core import serializers
 import json
 
 # Create your views here.
@@ -35,10 +35,7 @@ def add_vahay(request):
 
 def get_list_vahay(request):
 
-	list_vahay = Vahay.objects.all()
-	context = {
-
-		'list' : list_vahay
-
-	}
-	return HttpResponse(context, content_type="application/json")
+	list_vahay = serializers.serialize('json', Vahay.objects.all())
+	# list_vahay = Vahay.objects.all()
+	
+	return HttpResponse(list_vahay, content_type="application/json")
