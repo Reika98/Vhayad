@@ -17,6 +17,7 @@ class Vahay(models.Model):
 	description = models.CharField(max_length=500)
 	address = models.CharField(max_length=500)
 	email = models.CharField(max_length=500,default="example@email.com")
+	account_num = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.name + " - " + self.owner.username
@@ -63,6 +64,7 @@ class Resident(models.Model):
 	occupation = models.CharField(max_length=100)
 	home_address = models.CharField(max_length=100)
 	email = models.CharField(max_length=100)
+	account_num = models.IntegerField(default=0)
 
 	def __str__(self):
 		return self.name;
