@@ -72,6 +72,12 @@ def edit_vahay(request, pk):
 	return render(request, 'vahay/editVahay.html', context=context)
 
 
+def delete_vahay(request, pk):
+	vahay = get_object_or_404(Vahay, pk=pk)
+	vahay.delete()
+
+	return redirect('/')
+
 def get_list_vahay(request):
 
 	# list_vahay = serializers.serialize('json', Vahay.objects.all())
