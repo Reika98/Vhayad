@@ -86,14 +86,14 @@ def delete_vahay(request, pk):
 	return redirect('/')
 
 
-def get_list_reservation(request):
+def get_list_reservation(request, pk):
 	
 	if not request.user.is_authenticated:
 		return redirect('/')
 
-	list_obj = Transaction.objects.all()
+	list_obj = Transaction.objects.filter(trans_type='reserve').filter(recipient=pk)
 	context = {
-		'reservations': list_obj,
+		'reservations': list_obj
 	}
 	return redirect('/')
 
@@ -107,8 +107,7 @@ def approve_reservation(request, pk):
 	if request.method == 'POST':
 		transaction.trans_type = 'approved'
 		transaction.save()
-
-	response = payment.bank.pay(transaction.recipient,transaction.sender)
+		response = payment.bank.pay(transaction.recipient,transaction.sender)
 
 	return redirect('/')
 
@@ -185,7 +184,8 @@ def pay_rental(request):
 	remarks = ''
 
 	print "POST payment"
-	response = payment.bank.pay(transaction.recipient,transaction.sender)
+	return payment.bank.pay(transaction.recipient,transaction.sender)
+	# return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
 
 
 def cancel_reservation(request, pk):
@@ -194,6 +194,7 @@ def cancel_reservation(request, pk):
 	if request.method == 'POST':
 		transaction.trans_type = 'cancelled'
 		transaction.save()
+		return HttpResponse(json.dumps({'success':'cancelled'}), content_type='application/json')
 
+	print "GET cancel reservation"
 	return redirect('/')
-
