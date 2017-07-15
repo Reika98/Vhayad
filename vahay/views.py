@@ -81,6 +81,17 @@ def delete_vahay(request, pk):
 
 	return redirect('/')
 
+
+# def get_list_reservation(request):
+
+# 	list_obj = Transaction.objects.all()
+# 	context = {
+# 		'reservations': list_obj,
+# 	}
+# 	return render(request, 'vahay/vahayDetails.html', context=context)
+
+
+#MOBILE
 def get_list_vahay(request):
 
 	# list_vahay = serializers.serialize('json', Vahay.objects.all())
@@ -106,6 +117,7 @@ def m_get_vahay(request, pk):
 
 
 def reserve_vahay(request):
+
 	sender = request.POST.get('username')
 
 	result = Resident.objects.filter(username=sender)
@@ -120,5 +132,6 @@ def reserve_vahay(request):
 	trans_type = 'reserve'
 	remarks = ''
 
+	print "RESERVE vahay"
 	new_transaction = Transaction.objects.create(sender=sender,recipient=recipient,trans_type=trans_type,remarks=remarks)
 	return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')

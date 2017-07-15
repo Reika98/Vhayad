@@ -12,5 +12,6 @@ urlpatterns = [
 
 	url(r'^vahay-list/$', views.get_list_vahay, name='vahay_list'),
 	url(r'^vahay-list/(?P<pk>\d+)/$', views.m_get_vahay, name='m_get_vahay'),
+	# TO TEST
 	url(r'^reserve/$', views.reserve_vahay, name='reserve_vahay')
 ]
