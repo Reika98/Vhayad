@@ -2,8 +2,7 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Vahay, Resident
-from .models import Vahay
+from .models import Vahay, Resident, Transaction
 from .models import Image
 from django.core import serializers
 import json
