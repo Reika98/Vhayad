@@ -69,7 +69,11 @@ def edit_vahay(request, pk):
 
 def get_list_vahay(request):
 
-	list_vahay = serializers.serialize('json', Vahay.objects.all())
-	# list_vahay = Vahay.objects.all()
+	# list_vahay = serializers.serialize('json', Vahay.objects.all())
+	list_obj = Vahay.objects.all()
+	# vahays = [obj.as_json() for obj in list_obj]
+	
 	print "GET list_vahay"
-	return HttpResponse(list_vahay, content_type="application/json")
+	# return HttpResponse(list_vahay, content_type="application/json")
+	dictionaries = [ obj.as_dict() for obj in self.get_queryset() ]
+	return HttpResponse(json.dumps({"data": dictionaries}), content_type='application/json')

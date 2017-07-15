@@ -16,7 +16,7 @@ class Vahay(models.Model):
 	available = models.BooleanField(default=1)
 	description = models.CharField(max_length=500)
 	address = models.CharField(max_length=500)
-	email = models.CharField(max_length=500)
+	email = models.CharField(max_length=500,default="example@email.com")
 
 	def __str__(self):
 		return self.name + " - " + self.owner.username
@@ -29,6 +29,11 @@ class Vahay(models.Model):
 
 	def getOwner(self):
 		return self.owner.last_name + ", " + self.owner.first_name
+
+	def convert_json(self):
+		return {
+			"owner" : self.owner.first_name
+			}
 
 
 class Image(models.Model):
