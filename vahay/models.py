@@ -36,3 +36,14 @@ class Image(models.Model):
 
 	def __str__(self):
 		return self.vahay.name + " - " + self.link
+
+
+class Transaction(models.Model):
+
+	sender 		= models.CharField(max_length=25)
+	trans_type 	= models.CharField(max_length=15)
+	recipient 	= models.CharField(max_length=25)
+	remarks		=  models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.id
