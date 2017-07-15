@@ -19,11 +19,8 @@
 				<div class="form-group">
 					<input type="text" name="address" class="form-control" placeholder="Address" value="{{ vahay.address }}" required>
 				</div>
-				<div class="form-group">
-					<div class="input-group">
-						<span class="input-group-addon" id="rent">Php</span>
-						<input type="text" name="rent_range" class="form-control" placeholder="Rent-range" value="{{ vahay.rent_range }}" aria-describedby="rent" required>
-					</div>
+				</div><div class="form-group">
+					<input type="number" name="rent" class="form-control" placeholder="Rent" value="{{ vahay.rent }}" required>
 				</div>
 				<div class="form-group">
 					<input type="text" name="email" class="form-control" placeholder="Email" value="{{ vahay.email }}" required>
@@ -50,7 +47,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="btn btn-success col-lg-offset-8"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Save</button>
+					<button type="submit" class="btn btn-success col-lg-offset-7"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Save</button>
 					<a href="{% url 'vahay:vahay_details' vahay.pk %}" class="btn btn-danger">Cancel</a>
 				</div>
 			</form>

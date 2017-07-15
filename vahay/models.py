@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class Vahay(models.Model):
 	owner = models.ForeignKey(User, on_delete=models.CASCADE)
 	name = models.CharField(max_length=255)
-	rent_range = models.CharField(max_length=100)
+	rent = models.IntegerField(default=0)
 	category = models.CharField(max_length=100)
 	contact_details = models.CharField(max_length=100)
 	vote = models.IntegerField(default=0)
@@ -44,7 +44,7 @@ class Vahay(models.Model):
 			"id" : self.id,
 			"owner" : self.owner.first_name + " " + self.owner.last_name,
 			"name" : self.name,
-			"rent_range": self.rent_range,
+			"rent": self.rent,
 			"category" : self.category,
 			"contact_details" : self.contact_details,
 			"available" : self.available,
