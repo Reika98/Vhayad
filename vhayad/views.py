@@ -13,16 +13,18 @@ def home(request):
 		return render(request, 'vhayad/homepage.html', context=context)
 
 	if request.method == 'POST':
-		user = request.POST['username']
+		username = request.POST['username']
 		password =  request.POST['password']
 		user = authenticate(username=username, password=password)
 
 		if user:
+			print "dir"
 			login(request, user)
 			return render(request, 'vhayad/homepage.html', context=context)
+
 		else:
+			print	"or dir"
 			context['error_message'] = 'Invalid username or password'
 			context['username'] = username
 
-
-	return render(request, 'vhayad/signin.html')
+	return render(request, 'vhayad/signin.html', context=context)
