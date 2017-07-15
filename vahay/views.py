@@ -183,7 +183,8 @@ def pay_rental(request):
 	remarks = ''
 
 	print "POST payment"
-	response = payment.bank.pay(transaction.recipient,transaction.sender)
+	return payment.bank.pay(transaction.recipient,transaction.sender)
+	# return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
 
 
 def cancel_reservation(request, pk):
@@ -192,6 +193,6 @@ def cancel_reservation(request, pk):
 	if request.method == 'POST':
 		transaction.trans_type = 'cancelled'
 		transaction.save()
+		return HttpResponse(json.dumps({'success':'cancelled'}), content_type='application/json')
 
 	return redirect('/')
-
