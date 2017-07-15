@@ -56,6 +56,8 @@ def edit_vahay(request, pk):
 		vahay.contact_details = request.POST.get('contacts')
 		vahay.address = request.POST.get('address')
 		vahay.description = request.POST.get('description')
+		vahay.email = request.POST.get('email')
+		vahay.account_num = request.POST.get('accountnum')
 		if request.POST.get('available', None) == None:
 			vahay.available = 0
 		else:
@@ -65,7 +67,7 @@ def edit_vahay(request, pk):
 		if request.POST['image_link']:
 			image_link = request.POST.get('image_link')
 			Image.objects.create(vahay=vahay, link=image_link)
-		return render(request, 'vahay/vahayDetails.html', context)
+		return redirect('/')
 
 	return render(request, 'vahay/editVahay.html', context=context)
 
@@ -80,10 +82,3 @@ def get_list_vahay(request):
 	# return HttpResponse(list_vahay, content_type="application/json")
 	list_vahay = [ obj.main_as_json() for obj in list_obj ]
 	return HttpResponse(json.dumps({"houses": list_vahay}), content_type='application/json')
-
-
-def m_vahay_details(request, pk):
-
-	result = Vahay.objects.filter(pk=pk)
-	vahay = [ obj.details_as_json() for obj in result ]
-	return HttpResponse(json.dumps({"houses": vahay}), content_type='application/json')

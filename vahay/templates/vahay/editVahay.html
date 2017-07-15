@@ -1,9 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Edit Vahay</title>
-</head>
-<body>
-	<p></p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Vahay-Edit{% endblock %}
+
+{% block body %}
+	<div class="panel panel-default col-sm-4 col-md-4 col-lg-4 col-lg-offset-4 edit_vahay">
+	  	<div class="panel-body ">
+			<h4 style="text-align: center;">Edit vahay</h4>
+			<form class="form-horizontal" action="{% url 'vahay:edit_vahay' vahay.pk %}" method="POST">
+				{% csrf_token %}
+				<div class="form-group">
+					<input type="text" name="vahay_name" class="form-control" placeholder="Name" value="{{ vahay.name }}" required>
+				</div>
+				<div class="form-group">
+					<input type="text" name="category" class="form-control" placeholder="Category" value="{{ vahay.category }}" required>
+				</div>
+				<div class="form-group">
+					<input type="text" name="contacts" class="form-control" placeholder="Contact Details" value="{{ vahay.contact_details }}" required>
+				</div>
+				<div class="form-group">
+					<input type="text" name="address" class="form-control" placeholder="Address" value="{{ vahay.address }}" required>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon" id="rent">Php</span>
+						<input type="text" name="rent_range" class="form-control" placeholder="Rent-range" value="{{ vahay.rent_range }}" aria-describedby="rent" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="text" name="email" class="form-control" placeholder="Email" value="{{ vahay.email }}" required>
+				</div><div class="form-group">
+					<input type="number" name="accountnum" class="form-control" placeholder="Account Number" value="{{ vahay.account_num }}" required>
+				</div>
+				<div class="form-group">
+					<input type="text" name="description" class="form-control" placeholder="Description" value="{{ vahay.description }}" required>
+				</div>
+				{% if vahay.isAvailable %}
+				   <div class="form-group">
+					    <input type="checkbox" name="available" checked>&nbsp;&nbsp;Available
+				   </div>
+			   {% else %}
+				   <div class="form-group">
+					   <input type="checkbox" name="available">&nbsp;&nbsp;Available
+				   </div>
+			   {% endif %}<br>
+			   <label for="basic-url">Add Image</label>
+		   	<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3">Link</span>
+						<input type="text" name="image_link" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success col-lg-offset-8"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>&nbsp;Save</button>
+					<a href="{% url 'vahay:vahay_details' vahay.pk %}" class="btn btn-danger">Cancel</a>
+				</div>
+			</form>
+	  	</div>
+	</div>
+	
+
+{% endblock %}
