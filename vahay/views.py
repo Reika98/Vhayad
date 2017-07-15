@@ -17,9 +17,11 @@ def vahay_details(request, pk):
 
 	vahay = get_object_or_404(Vahay, pk=pk)
 	images = Image.objects.filter(vahay=vahay)
+	residents = Resident.objects.filter(vahay=vahay)
 	context = {
 		'vahay': vahay,
-		'images': images
+		'images': images,
+		'residents': residents
 	}
 	return render(request, 'vahay/vahayDetails.html', context=context)
 

@@ -110,4 +110,35 @@
 		  </div>
 	</section>
 
+	<section class="residents">
+	  <div class="panel panel-default col-lg-6 col-lg-offset-3">
+		<h3 style="text-align:center;">Residents</h3>
+			<div class="panel-body">
+				<div class="container-fluid">
+					<ul class="list-group">
+						{% for resident in residents %}
+						<!-- <div class="row">
+							<div class="col-md-6">
+								<p style="font-size: 1em; font-family: 'Roboto Slab', serif;">{{ resident.name }}</p>
+							</div>
+							<div class="col-md-2 col-md-offset-2">
+								<a href="#" class="btn btn-sm btn-success">View</a>
+							</div>
+							<div class="col-md-2">
+								<a href="#" class="btn btn-sm btn-danger">Remove</a>
+							</div>
+						</div><br> -->
+
+						  <li class="list-group-item" style="padding-bottom:15px;">{{ resident.name }} - {{ resident.age }} yr/s old
+						  <button style="float:right;" class="btn btn-sm btn-danger">delete</button>
+						  <button style="float:right;" class="btn btn-sm btn-success">view</button>
+						  </li>
+						
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
 {% endblock %}
