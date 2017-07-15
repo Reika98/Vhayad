@@ -16,6 +16,7 @@ class Vahay(models.Model):
 	available = models.BooleanField(default=1)
 	description = models.CharField(max_length=500)
 	address = models.CharField(max_length=500)
+	email = models.CharField(max_length=500)
 
 	def __str__(self):
 		return self.name + " - " + self.owner.username
@@ -39,12 +40,22 @@ class Image(models.Model):
 
 
 class Transaction(models.Model):
-
-	sender 		= models.CharField(max_length=25)
-	trans_type 	= models.CharField(max_length=15)
-	recipient 	= models.CharField(max_length=25)
-	remarks		=  models.CharField(max_length=100)
+	sender = models.CharField(max_length=25)
+	trans_type = models.CharField(max_length=15)
+	recipient = models.CharField(max_length=25)
+	remarks = models.CharField(max_length=100)
 
 	def __str__(self):
 		return self.id
+
+
+class Resident(models.Model):
+	name = models.CharField(max_length=100)
+	age = models.IntegerField(default=0)
+	occupation = models.CharField(max_length=100)
+	home_address = models.CharField(max_length=100)
+	email = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name;
 
