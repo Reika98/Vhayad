@@ -5,5 +5,19 @@
 </head>
 <body>
 	<h1>Vahay Details</h1>
+	<p>Owner: {{ vahay.getOwner }}</p>
+	<p>Name: {{ vahay.name }}</p>
+	<p>Category: {{ vahay.category }}</p>
+	<p>Contact Details: {{ vahay.contact_details }}</p>
+	<p>Rent-Range: {{ vahay.rent_range }}</p>
+	<p>Votes: {{ vahay.vote }}</p>
+	<p>Description: {{ vahay.description }}</p>
+	<p>Address: {{ vahay.address }}</p>
+
+	{% if vahay.isAvailable %}
+	 	<p>Now Available</p>
+	{% else %}
+		<p>Not Available</p>
+	{% endif %}
 </body>
 </html>
