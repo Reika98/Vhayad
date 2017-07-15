@@ -86,7 +86,12 @@ class Resident(models.Model):
 	home_address = models.CharField(max_length=100)
 	email = models.CharField(max_length=100)
 	account_num = models.IntegerField(default=0)
+	vahay = models.ForeignKey(Vahay, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.name;
 
+	def account_as_json(self):
+		return {
+			"account_num" : self.account_num,
+		}	
