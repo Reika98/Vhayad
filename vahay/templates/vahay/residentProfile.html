@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ resident.name }}{% endblock %}
+
+{% block body %}
+	<section class="residents">
+	  <div class="panel panel-default col-lg-6 col-lg-offset-3">
+		<h3 style="text-align:center;">Residents Profile</h3>
+			<div class="panel-body">
+				<div class="container-fluid">
+					<div class="well col-lg-12">
+						<p>Name: {{ resident.name }}</p>
+						<p>Age: {{ resident.age }}</p>
+						<p>Occupation: {{ resident.occupation }}</p>
+						<p>Email: {{ resident.email }}</p>
+					</div>
+				</div>
+			</div>
+
+		<a href="#" class="btn btn-success col-lg-offset-5" style="margin-bottom: 15px;">Go back</a>
+		</div>
+	</section>
+	
+
+{% endblock %}

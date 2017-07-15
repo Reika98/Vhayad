@@ -28,6 +28,11 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li>
+						<a href="{% url 'vahay:reservations' %}">
+							<span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Reservations
+						</a>
+					</li>
+					<li>
 						<a href="#">
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
 							{% block user %}{{ user.username }}{% endblock %}

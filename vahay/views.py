@@ -86,6 +86,28 @@ def delete_vahay(request, pk):
 	return redirect('/')
 
 
+def delete_resident(request, pk):
+	resident = get_object_or_404(Resident, pk=pk)
+	resident.delete()
+
+	return redirect('/')
+
+
+def resident_profile(request, pk):
+	resident = get_object_or_404(Resident, pk=pk)
+	context = {
+		'resident': resident
+	}
+
+	return render(request, 'vahay/residentProfile.html', context=context)
+
+
+def reservations(request):
+	return render(request, 'vahay/reservations.html')
+
+	
+
+
 def get_list_reservation(request, pk):
 	
 	if not request.user.is_authenticated:
