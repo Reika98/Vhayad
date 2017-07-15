@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'payment',
     'vahay',
+    'vhayad',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
