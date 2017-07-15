@@ -4,13 +4,14 @@
 	<title>Add Vahay</title>
 </head>
 <body>
-	<form action="{ url 'add_vahay'}" method="POST">
-		<input type="text" name="name" placeholder="vahay name">
-		<input type="text" name="category" placeholder="category">
-		<input type="text" name="contact_details" placeholder="contact details">
-		<input type="text" name="rent_range" placeholder="rent range">
-		<input type="text" name="address" placeholder="address">
-		<input type="text" name="description" placeholder="description">
+	<form action="{% url 'vahay:add_vahay' %}" method="POST">
+		{% csrf_token %}
+		<input type="text" name="name" placeholder="vahay name"><br>
+		<input type="text" name="category" placeholder="category"><br>
+		<input type="text" name="contact_details" placeholder="contact details"><br>
+		<input type="text" name="rent_range" placeholder="rent range"><br>
+		<input type="text" name="address" placeholder="address"><br>
+		<input type="text" name="description" placeholder="description"><br>
 		<button type="submit">Add Vahay</button>
 	</form>
 </body>

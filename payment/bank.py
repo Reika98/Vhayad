@@ -1,8 +1,9 @@
 import 		http.client
 import 		json
 
-from 		django.shortcuts 	import 		render, reverse, redirect
-from 		django.http 		import 		HttpResponse
+from 		django.shortcuts 			import 		render, reverse, redirect
+from 		django.http 				import 		HttpResponse
+from 		django.contrib.auth.models 	import 		User
 
 
 conn = http.client.HTTPSConnection("api-uat.unionbankph.com")
@@ -34,3 +35,8 @@ def pay(request):
 	sample = { 'json': 'waaaaa'}
 
 	return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+def get_account_num(request):
+
+	
