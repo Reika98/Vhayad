@@ -27,13 +27,13 @@ def add_vahay(request):
 		name = request.POST.get('name')
 		category = request.POST.get('category')
 		contact_details = request.POST.get('contact_details')
-		rent_range = request.POST.get('rent_range')
+		rent= request.POST.get('rent')
 		address = request.POST.get('address')
 		description = request.POST.get('description')
 		email = request.POST.get('email')
 		accountnum = request.POST.get('accountnum')
 		Vahay.objects.create(owner=request.user, name=name, category=category, contact_details=contact_details, 
-			rent_range=rent_range, vote=1, available=True, description=description, address=address, email=email,
+			rent=rent, vote=1, available=True, description=description, address=address, email=email,
 			account_num=accountnum)
 		return redirect('/')
 
@@ -51,7 +51,7 @@ def edit_vahay(request, pk):
 
 	if request.method == "POST":
 		vahay.name = request.POST.get('vahay_name')
-		vahay.rent_range = request.POST.get('rent_range')
+		vahay.rent = request.POST.get('rent')
 		vahay.category = request.POST.get('category')
 		vahay.contact_details = request.POST.get('contacts')
 		vahay.address = request.POST.get('address')
