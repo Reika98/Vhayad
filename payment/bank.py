@@ -15,7 +15,7 @@ def pay(sender,recipient,amount):
 	# source_account = info['resident_account']
 	# amount = info['amount_due']
 
-	result1 = vahay.models.Vahay.objects.filter(owner=sender)
+	result1 = vahay.models.Resident.objects.filter(owner=sender)
 	sender = [ obj.account_as_json() for obj in result1 ]
 	sender_account = sender[0]['account_num']
 
@@ -23,6 +23,7 @@ def pay(sender,recipient,amount):
 	recipient = [ obj.account_as_json() for obj in result2 ]
 	recipient_account = recipient[0]['account_num']
 
+	amount = recipient[0]['rent']
 
 	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"003\",\"source_account\":"+source_account+",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":"+amount+"}"
 
