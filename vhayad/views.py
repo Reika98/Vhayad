@@ -8,12 +8,11 @@ from vahay import models
 # Create your views here.
 
 def home(request):
-	vahays =  request.user.vahay_set.all()
-	context = {
-		'vahays':vahays
-	}
+	context = {}
 
 	if request.user.is_authenticated:
+		vahays =  request.user.vahay_set.all()
+		context['vahays'] = vahays
 		return render(request, 'vhayad/homepage.html', context=context)
 
 	if request.method == 'POST':
@@ -23,7 +22,7 @@ def home(request):
 
 		if user:
 			login(request, user)
-			return render(request, 'vhayad/homepage.html', context=context)
+			return redirect('/')
 		else:
 			context['error_message'] = 'Invalid username or password'
 			context['username'] = username

@@ -5,11 +5,13 @@
 </head>
 <body>
 	<h1>Homepage</h1>
-	<a href="{% url 'sign_out' %}">Sign out</a>
 
-	<form action="{ url 'add_vahay' }" method="POST">
-		{% csrf_token %}
-		<button type="submit">Add Vahay</button>
-	</form>
+	{% for vahay in vahays %}
+		<p><a>{{ vahay }}</a></p>
+	{% endfor %}
+
+	<a href="{% url 'vahay:add_vahay' %}">Add Vahay</a>
+
+	<a href="{% url 'sign_out' %}">Sign out</a>
 </body>
 </html>
