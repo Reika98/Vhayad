@@ -15,10 +15,11 @@ def pay(request):
 	# source_account = info['resident_account']
 	# amount = info['amount_due']
 
-	account_num = vahay.models.Vahay.objects.filter(name='rafelle')
-	print account_num
+	result = vahay.models.Vahay.objects.filter(owner='3')
+	recipient = [ obj.account_as_json() for obj in result ]
+	recipient_account = recipient[0]['account_num']
 
-	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"004\",\"source_account\":\"101828352677\",\"source_currency\":\"PHP\",\"target_account\":"+account_num+",\"target_currency\":\"PHP\",\"amount\":10}"
+	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"003\",\"source_account\":\"101828352677\",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":10}"
 
 	headers = {
 
@@ -38,4 +39,4 @@ def pay(request):
 
 	sample = { 'json': 'waaaaa'}
 
-	return HttpResponse(json.dumps(data), content_type="application/json")
+	return HttpResponse(json.dumps(sample), content_type="application/json")

@@ -80,3 +80,10 @@ def get_list_vahay(request):
 	# return HttpResponse(list_vahay, content_type="application/json")
 	list_vahay = [ obj.main_as_json() for obj in list_obj ]
 	return HttpResponse(json.dumps({"houses": list_vahay}), content_type='application/json')
+
+
+def m_vahay_details(request, pk):
+
+	result = Vahay.objects.filter(pk=pk)
+	vahay = [ obj.details_as_json() for obj in result ]
+	return HttpResponse(json.dumps({"houses": vahay}), content_type='application/json')
