@@ -3,11 +3,15 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from vahay import models
 
 # Create your views here.
 
 def home(request):
-	context = {}
+	vahays =  request.user.vahay_set.all()
+	context = {
+		'vahays':vahays
+	}
 
 	if request.user.is_authenticated:
 		return render(request, 'vhayad/homepage.html', context=context)
@@ -25,6 +29,7 @@ def home(request):
 			context['username'] = username
 
 	return render(request, 'vhayad/signin.html', context=context)
+
 
 def sign_out(request):
 	logout(request)

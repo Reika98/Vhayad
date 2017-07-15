@@ -6,5 +6,10 @@
 <body>
 	<h1>Homepage</h1>
 	<a href="{% url 'sign_out' %}">Sign out</a>
+
+	<form action="{ url 'add_vahay' }" method="POST">
+		{% csrf_token %}
+		<button type="submit">Add Vahay</button>
+	</form>
 </body>
 </html>
