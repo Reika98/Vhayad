@@ -19,8 +19,9 @@ urlpatterns = [
 	url(r'^vahay-list/$', views.get_list_vahay, name='vahay_list'),
 	url(r'^vahay-list/(?P<pk>\d+)/$', views.m_get_vahay, name='m_get_vahay'),
 	# TO TEST
-	url(r'^reserve/$', views.reserve_vahay, name='reserve_vahay'),
+	url(ur'^reserve/(?P<email>.*)/(?P<vahayId>.*)/$', views.reserve_vahay, name='reserve_vahay'),
 	url(r'^cancel-reserve/$', views.cancel_reservation, name='cancel_reservation'),
-	url(r'^pay/$', views.pay_rental, name='pay_rental')
+	url(r'^pay/$', views.pay_rental, name='pay_rental'),
 
+	url(r'^sign-in/$', views.m_sign_in, name='m_sign_in')
 ]

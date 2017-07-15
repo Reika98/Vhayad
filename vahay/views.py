@@ -6,6 +6,7 @@ from .models import Vahay, Resident, Transaction
 from .models import Image
 from django.core import serializers
 
+
 import payment
 import json
 
@@ -176,16 +177,16 @@ def m_get_vahay(request, pk):
 	return HttpResponse(json.dumps({"houses": vahay}), content_type='application/json')
 
 
-def reserve_vahay(request):
-	if request.method == "POST":
-		sender_name = request.POST.get('email')
-		print request.POST.get('email')
-	print "HUHU"
+def reserve_vahay(request, email, vahayId):
+
+	sender_name = email
+	print sender_name
+
 	result = Resident.objects.filter(email=sender_name)
 	sender = [ obj.account_as_json() for obj in result ]
-	sender_id = sender[0]['id']
+	sender_id = sender[0]['resident_id']
 
-	recipient = request.POST.get('vahayId')
+	recipient = vahayId
 	# result1 = vahay.models.Vahay.objects.filter(owner=recipient)
 	# recipient = [ obj.account_as_json() for obj in result ]
 	# recipient_id = recipient[0]['account_num']
@@ -194,7 +195,7 @@ def reserve_vahay(request):
 	remarks = ''
 
 	print "POST reservation"
-	new_transaction = Transaction.objects.create(sender=sender,recipient=recipient,trans_type=trans_type,remarks=remarks)
+	new_transaction = Transaction.objects.create(sender=sender_id,recipient=recipient,trans_type=trans_type,remarks=remarks)
 	return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
 
 
@@ -223,8 +224,3 @@ def cancel_reservation(request, pk):
 		transaction.save()
 		print "GET cancel reservation"
 		return HttpResponse(json.dumps({'success':'cancelled'}), content_type='application/json')
-
-
-def sign_in(request):
-
-	transaction = get_object_or_404(Transaction, pk=pk)
