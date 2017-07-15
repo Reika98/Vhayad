@@ -30,8 +30,11 @@ def add_vahay(request):
 		rent_range = request.POST.get('rent_range')
 		address = request.POST.get('address')
 		description = request.POST.get('description')
+		email = request.POST.get('email')
+		accountnum = request.POST.get('accountnum')
 		Vahay.objects.create(owner=request.user, name=name, category=category, contact_details=contact_details, 
-			rent_range=rent_range, vote=1, available=True, description=description, address=address)
+			rent_range=rent_range, vote=1, available=True, description=description, address=address, email=email,
+			account_num=accountnum)
 		return redirect('/')
 
 	return render(request, 'vahay/addVahay.html')

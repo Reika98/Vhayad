@@ -1,19 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Add Vahay</title>
-</head>
-<body>
-	<form action="{% url 'vahay:add_vahay' %}" method="POST">
-		{% csrf_token %}
-		<input type="text" name="name" placeholder="vahay name"><br>
-		<input type="text" name="category" placeholder="category"><br>
-		<input type="text" name="contact_details" placeholder="contact details"><br>
-		<input type="text" name="rent_range" placeholder="rent range"><br>
-		<input type="text" name="address" placeholder="address"><br>
-		<input type="text" name="description" placeholder="description"><br>
-		<input type="text" name="email" placeholder="email"><br>
-		<button type="submit">Add Vahay</button>
-	</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Create Vahay{% endblock %}
+
+{% block body %}
+
+	<div class="panel panel-default col-sm-4 col-md-4 col-lg-4 col-lg-offset-4 add_vahay">
+	  	<div class="panel-body ">
+			<h4 style="text-align: center;">Create vahay</h4>
+				<form class="form-horizontal" action="{% url 'vahay:add_vahay'%}" method="POST">
+					{% csrf_token %}
+					<div class="form-group">
+						<input type="text" name="name" class="form-control" placeholder="Name" required>
+				   </div>
+				   <div class="form-group">
+						<input type="text" name="category" class="form-control" placeholder="Category" required>
+				   </div>
+				   <div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon" id="rent">Php</span>
+							<input type="text" name="rent_range" class="form-control" placeholder="Rent-range" aria-describedby="rent" required>
+						</div>
+					</div>
+				  	<div class="form-group">
+						<input type="text" name="contact_details" class="form-control" placeholder="Contact" required>
+				   </div>
+				   <div class="form-group">
+						<input type="text" name="address" class="form-control" placeholder="Complete Adress" required>
+				   </div>
+				   <div class="form-group">
+						<input type="text" name="description" class="form-control" placeholder="Other Details" required>
+				   </div>
+				   <div class="form-group">
+						<input type="text" name="email" class="form-control" placeholder="email" required>
+				   </div>
+				   <div class="form-group">
+						<input type="text" name="accountnum" class="form-control" placeholder="account number" required>
+				   </div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success col-lg-offset-6"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;Create</button>
+						<a href="{% url 'home' %}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>&nbsp;Cancel</a>
+					</div>
+				</form>
+	  	</div>
+	</div>
+
+{% endblock %}
