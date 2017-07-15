@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^add-vahay/$', views.add_vahay, name='add_vahay'),
     url(r'^(?P<pk>\d+)/edit-vahay/$', views.edit_vahay, name='edit_vahay'),
 	url(r'^delete-vahay/(?P<pk>\d+)/$', views.delete_vahay, name='delete_vahay'),
+	url(r'^residents/delete-resident/(?P<pk>\d+)/$', views.delete_resident, name='delete_resident'),
 
 	url(r'^vahay-list/$', views.get_list_vahay, name='vahay_list'),
 	url(r'^vahay-list/(?P<pk>\d+)/$', views.m_get_vahay, name='m_get_vahay'),
