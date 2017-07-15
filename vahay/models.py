@@ -72,11 +72,11 @@ class Transaction(models.Model):
 	sender = models.CharField(max_length=25)
 	trans_type = models.CharField(max_length=15)
 	recipient = models.CharField(max_length=25)
-	remarks = models.CharField(max_length=100)
+	remarks = models.CharField(max_length=100, blank=True)
 	time = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
-		return self.id
+		return str(self.id)
 
 
 class Resident(models.Model):
@@ -94,7 +94,8 @@ class Resident(models.Model):
 
 	def account_as_json(self):
 		return {
-			"account_num" : self.account_num,
+			"id" : self.id,
+			"account_num" : self.account_num
 		}	
 
 

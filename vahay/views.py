@@ -184,7 +184,7 @@ def reserve_vahay(request, email, vahayId):
 
 	result = Resident.objects.filter(email=sender_name)
 	sender = [ obj.account_as_json() for obj in result ]
-	sender_id = sender[0]['resident_id']
+	sender_id = sender[0]['id']
 
 	recipient = vahayId
 	# result1 = vahay.models.Vahay.objects.filter(owner=recipient)
@@ -199,9 +199,9 @@ def reserve_vahay(request, email, vahayId):
 	return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
 
 
-def pay_rental(request):
+def pay_rental(request, email):
 
-	sender_name = request.POST.get('username')
+	sender_name = email
 
 	result = Resident.objects.filter(username=sender_name)
 	sender = [ obj.account_as_json() for obj in result ]
