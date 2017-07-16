@@ -122,8 +122,6 @@ def reservations(request, pk):
 	return render(request, 'vahay/reservations.html', context=context)
 
 
-<<<<<<< HEAD
-=======
 def confirm_reservation(request, pk):
 	if not request.user.is_authenticated:
 		return redirect('/')
@@ -165,8 +163,6 @@ def approve_reservation(request, pk):
 
 	return redirect('/')
 
-
->>>>>>> 98b94d5351b6e0183a72097c064543735eb027a7
 def deny_reservation(request, pk):
 
 	if not request.user.is_authenticated:
