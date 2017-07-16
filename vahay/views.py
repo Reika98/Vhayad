@@ -110,41 +110,16 @@ def reservations(request, pk):
 	if not request.user.is_authenticated:
 		return redirect('/')
 
-<<<<<<< HEAD
 	list_obj = Transaction.objects.filter(trans_type='reserve').filter(recipient=pk)
 	print list_obj.as_json()
 	# sender = get_object_or_404(Resident, pk=list_obj.)
-=======
 	vahay = get_object_or_404(Vahay, pk=pk)
 	transactions = Reservation.objects.filter(recipient=vahay)
-
->>>>>>> 3f801ccc9142e7aeaa57d20946118c5eb13a37ef
 	context = {
 		'transactions': transactions,
 	}
 
 	return render(request, 'vahay/reservations.html', context=context)
-
-
-def approve_reservation(request, pk):
-
-	if not request.user.is_authenticated:
-		return redirect('/')
-
-	transaction = get_object_or_404(Transaction, pk=pk)
-	if request.method == 'POST':
-		transaction.trans_type = 'approved'
-		transaction.save()
-		response = payment.bank.pay(transaction.recipient,transaction.sender)
-
-		resident = get_object_or_404(Resident, pk=transaction.sender)
-		resident.vahay = transaction.recipient
-		resident.save()
-
-		vahay = get_object_or_404(Vahay, pk=transaction.recipient)
-		new_reservation = Payment.objects.create(vahay=vahay, resident=resident, amount=vahay.rent)
-
-	return redirect('/')
 
 
 def deny_reservation(request, pk):
@@ -220,16 +195,21 @@ def pay_rental(request, email):
 	trans_type = 'payment'
 	remarks = ''
 
+	new_transaction = Transaction.objects.create(sender=sender_id,recipient=recipient,trans_type=trans_type,remarks=remarks)
+	trans_id = new_transaction.id
+
 	print "POST payment"
-	response = payment.bank.pay(sender_id,recipient,vahay.rent)
+	response = payment.bank.pay(sender_id,recipient,vahay.rent,trans_id)
 
 
 	resident = get_object_or_404(Resident, pk=sender_id)
 	payments = get_object_or_404(Payment, resident=resident)
 
-	payments.amount = payments.amount - vahay.rent
+	amount_to_pay = payments.amount
+	payments.amount = 0
+	payments.save();
 
-	return HttpResponse(json.dumps({'success':'yehey', 'balance': payments.amount}), content_type='application/json')
+	return HttpResponse(json.dumps({'success':'yehey', 'balance': amount_to_pay}), content_type='application/json')
 
 
 def cancel_reservation(request, pk):
@@ -241,3 +221,14 @@ def cancel_reservation(request, pk):
 		print "GET cancel reservation"
 		return HttpResponse(json.dumps({'success':'cancelled'}), content_type='application/json')
 
+
+def get_balance(request, email):
+
+	result = Resident.objects.filter(email=email)
+	resident = [ obj.account_as_json() for obj in result ]
+	resident_id = resident[0]['id']
+
+	payment = get_object_or_404(Payment, pk=resident_id)
+	balance = payment.amount
+
+	return HttpResponse(json.dumps({'balance': balance}), content_type='application/json')

@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 
 conn = http.client.HTTPSConnection("api-uat.unionbankph.com")
 
-def pay(sender,recipient,amount):
+def pay(sender,recipient,amount,trans_id):
 
 	# info = json.loads(request.body)
 	# source_account = info['resident_account']
@@ -19,15 +19,15 @@ def pay(sender,recipient,amount):
 
 	result1 = vahay.models.Resident.objects.filter(vahay=vahayy)
 	sender = [ obj.account_as_json() for obj in result1 ]
-	source_account = sender[0]['account_num']
+	source_account = str(sender[0]['account_num'])
 
 	result2 = vahay.models.Vahay.objects.filter(pk=recipient)
 	recipient = [ obj.account_as_json() for obj in result2 ]
-	recipient_account = recipient[0]['account_num']
+	recipient_account = str(recipient[0]['account_num'])
 
 	amount_pay = str(amount);
-
-	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"003\",\"source_account\":"+source_account+",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":"+amount_pay+"}"
+	print "AMOUNT"+amount_pay
+	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":"+str(trans_id)+",\"source_account\":"+source_account+",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":"+amount_pay+"}"
 
 	headers = {
 
