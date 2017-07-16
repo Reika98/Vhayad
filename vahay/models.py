@@ -69,9 +69,9 @@ class Image(models.Model):
 
 
 class Transaction(models.Model):
-	sender = models.CharField(max_length=25)
+	sender = models.IntegerField(default=0)
 	trans_type = models.CharField(max_length=15)
-	recipient = models.CharField(max_length=25)
+	recipient = models.IntegerField(default=0)
 	remarks = models.CharField(max_length=100, blank=True)
 	time = models.DateTimeField(auto_now_add=True)
 
@@ -110,3 +110,12 @@ class Payment(models.Model):
 	resident = models.ForeignKey(Resident, on_delete=models.CASCADE)
 	amount = models.IntegerField(default=0)
 
+
+class Reservation(models.Model):
+	sender = models.ForeignKey(Resident, on_delete=models.CASCADE)
+	recipient = models.ForeignKey(Vahay, on_delete=models.CASCADE)
+	remarks = models.CharField(max_length=100, blank=True)
+	time = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return str(self.id)

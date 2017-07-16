@@ -7,7 +7,20 @@
 		<h3 style="text-align:center;">Reservations</h3>
 			<div class="panel-body">
 				<div class="container-fluid">
-					<p></p>
+					{% for transaction in transactions %}
+						<div class="well col-lg-12">
+							<p>Name: <strong>{{ transaction.sender.name }}</strong></p>
+							<div class="row">
+								<div class="col-lg-6">
+									<p>Date: {{ transaction.time }}</p>
+								</div>
+								<div class="col-md-2 col-md-offset-3">
+									<a href="{% url 'vahay:confirm_reservation' %}" class="btn btn-success">Confirm</a>
+								</div>
+							</div>
+							<p>Email: {{ transaction.sender.email }}</p>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Vahay, Resident, Transaction
-from .models import Image, Payment
+from .models import Image, Payment, Reservation
 from django.core import serializers
 
 
@@ -110,13 +110,14 @@ def reservations(request, pk):
 	if not request.user.is_authenticated:
 		return redirect('/')
 
-	list_obj = Transaction.objects.filter(trans_type='reserve').filter(recipient=pk)
-	print list_obj.as_json
-	# sender = get_object_or_404(Resident, pk=list_obj.)
+	vahay = get_object_or_404(Vahay, pk=pk)
+	transactions = Reservation.objects.filter(recipient=vahay)
+
 	context = {
-		'reservations': list_obj
+		'transactions': transactions,
 	}
-	return render(request, 'vahay/reservations.html')
+
+	return render(request, 'vahay/reservations.html', context=context)
 
 
 def approve_reservation(request, pk):
