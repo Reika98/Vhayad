@@ -15,7 +15,7 @@
 									<p>Date: {{ transaction.time }}</p>
 								</div>
 								<div class="col-md-2 col-md-offset-3">
-									<a href="{% url 'vahay:confirm_reservation' %}" class="btn btn-success">Confirm</a>
+									<a href="{% url 'vahay:confirm_reservation' transaction.pk %}" class="btn btn-success">Confirm</a>
 								</div>
 							</div>
 							<p>Email: {{ transaction.sender.email }}</p>
