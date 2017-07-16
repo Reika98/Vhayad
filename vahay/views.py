@@ -97,6 +97,7 @@ def delete_resident(request, pk):
 def resident_profile(request, pk):
 	resident = get_object_or_404(Resident, pk=pk)
 	payment = get_object_or_404(Payment, resident=resident)
+	print resident.name
 	context = {
 		'resident': resident,
 		'payment': payment
@@ -106,7 +107,6 @@ def resident_profile(request, pk):
 	
 
 def reservations(request, pk):
-	
 	if not request.user.is_authenticated:
 		return redirect('/')
 
@@ -122,6 +122,51 @@ def reservations(request, pk):
 	return render(request, 'vahay/reservations.html', context=context)
 
 
+<<<<<<< HEAD
+=======
+def confirm_reservation(request, pk):
+	if not request.user.is_authenticated:
+		return redirect('/')
+
+	transaction = get_object_or_404(Reservation, pk=pk)
+	vahay = transaction.recipient
+	sender = transaction.sender
+	sender.vahay = vahay
+	sender.save()
+
+	transaction.delete()
+	Payment.objects.create(vahay=vahay,resident=sender, amount=vahay.rent)
+
+	images = Image.objects.filter(vahay=vahay)
+	residents = Resident.objects.filter(vahay=vahay)
+	context = {
+		'vahay': vahay,
+		'images': images,
+		'residents': residents
+	}
+
+	return render(request, 'vahay/vahayDetails.html', context=context)
+
+
+def approve_reservation(request, pk):
+
+	if not request.user.is_authenticated:
+		return redirect('/')
+
+	transaction = get_object_or_404(Transaction, pk=pk)
+	if request.method == 'POST':
+		transaction.trans_type = 'approved'
+		transaction.save()
+		response = payment.bank.pay(transaction.recipient,transaction.sender)
+
+		resident = get_object_or_404(Vahay, pk=transaction.sender)
+		resident.vahay = transaction.recipient
+		resident.save()
+
+	return redirect('/')
+
+
+>>>>>>> 98b94d5351b6e0183a72097c064543735eb027a7
 def deny_reservation(request, pk):
 
 	if not request.user.is_authenticated:
