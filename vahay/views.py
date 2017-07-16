@@ -110,13 +110,11 @@ def reservations(request, pk):
 	if not request.user.is_authenticated:
 		return redirect('/')
 
-	list_obj = Transaction.objects.filter(trans_type='reserve').filter(recipient=pk)
-	print list_obj.as_json()
-	# sender = get_object_or_404(Resident, pk=list_obj.)
 	vahay = get_object_or_404(Vahay, pk=pk)
 	transactions = Reservation.objects.filter(recipient=vahay)
 	context = {
 		'transactions': transactions,
+		'vahay' : vahay
 	}
 
 	return render(request, 'vahay/reservations.html', context=context)
@@ -210,16 +208,17 @@ def reserve_vahay(request, email, vahayId):
 	sender = [ obj.account_as_json() for obj in result ]
 	sender_id = sender[0]['id']
 
-	recipient = vahayId
+	resident = get_object_or_404(Resident, pk=sender_id)
+
+	recipient = get_object_or_404(Vahay, pk=vahayId)
 	# result1 = vahay.models.Vahay.objects.filter(owner=recipient)
 	# recipient = [ obj.account_as_json() for obj in result ]
 	# recipient_id = recipient[0]['account_num']
 
-	trans_type = 'reserve'
 	remarks = ''
 
 	print "POST reservation"
-	new_transaction = Transaction.objects.create(sender=sender_id,recipient=recipient,trans_type=trans_type,remarks=remarks)
+	new_transaction = Reservation.objects.create(sender=resident,recipient=recipient,remarks=remarks)
 	return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
 
 

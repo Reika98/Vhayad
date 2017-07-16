@@ -70,7 +70,7 @@
 							{% if vahay.owner == user %}
 							  <a href="{% url 'vahay:edit_vahay' vahay.pk %}" class="btn btn-xs btn-primary">Edit Vahay</a>
 							{% else %}
-							  <form action="{% url 'vahay:vote_vahay' vahay.pk %}?next={{ request.path }}" method="POST">
+							  <form action="#" method="POST">
 									{% csrf_token %}
 									<button class="btn btn-sm btn-primary"><strong>Favorite</strong>&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
 							  </form>
