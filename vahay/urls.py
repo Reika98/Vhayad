@@ -21,6 +21,7 @@ urlpatterns = [
 	# TO TEST
 	url(ur'^reserve/(?P<email>.*)/(?P<vahayId>.*)/$', views.reserve_vahay, name='reserve_vahay'),
 	url(r'^cancel-reserve/$', views.cancel_reservation, name='cancel_reservation'),
-	url(r'^pay/(?P<email>.*)/$', views.pay_rental, name='pay_rental'),
+	url(r'^balance/(?P<email>.*)/$', views.get_balance, name='get_balance'),
 
+	url(r'^pay/(?P<email>.*)/$', views.pay_rental, name='pay_rental'),
 ]

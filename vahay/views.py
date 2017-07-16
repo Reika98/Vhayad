@@ -111,7 +111,7 @@ def reservations(request, pk):
 		return redirect('/')
 
 	list_obj = Transaction.objects.filter(trans_type='reserve').filter(recipient=pk)
-	print list_obj.as_json
+	print list_obj.as_json()
 	# sender = get_object_or_404(Resident, pk=list_obj.)
 	context = {
 		'reservations': list_obj
@@ -130,9 +130,12 @@ def approve_reservation(request, pk):
 		transaction.save()
 		response = payment.bank.pay(transaction.recipient,transaction.sender)
 
-		resident = get_object_or_404(Vahay, pk=transaction.sender)
+		resident = get_object_or_404(Resident, pk=transaction.sender)
 		resident.vahay = transaction.recipient
 		resident.save()
+
+		vahay = get_object_or_404(Vahay, pk=transaction.recipient)
+		new_reservation = Payment.objects.create(vahay=vahay, resident=resident, amount=vahay.rent)
 
 	return redirect('/')
 
@@ -201,17 +204,25 @@ def pay_rental(request, email):
 
 	sender_name = email
 
-	result = Resident.objects.filter(username=sender_name)
+	result = Resident.objects.filter(email=sender_name)
 	sender = [ obj.account_as_json() for obj in result ]
 	sender_id = sender[0]['id']
 
-	recipient = sender[0]['owner']
+	vahay = sender[0]['vahay']
+	recipient = vahay.id
 	trans_type = 'payment'
 	remarks = ''
 
 	print "POST payment"
-	return payment.bank.pay(transaction.recipient,transaction.sender)
-	# return HttpResponse(json.dumps({'success':'yehey'}), content_type='application/json')
+	response = payment.bank.pay(sender_id,recipient,vahay.rent)
+
+
+	resident = get_object_or_404(Resident, pk=sender_id)
+	payments = get_object_or_404(Payment, resident=resident)
+
+	payments.amount = payments.amount - vahay.rent
+
+	return HttpResponse(json.dumps({'success':'yehey', 'balance': payments.amount}), content_type='application/json')
 
 
 def cancel_reservation(request, pk):
@@ -222,3 +233,16 @@ def cancel_reservation(request, pk):
 		transaction.save()
 		print "GET cancel reservation"
 		return HttpResponse(json.dumps({'success':'cancelled'}), content_type='application/json')
+
+
+def get_balance(request, email):
+
+	result = Resident.objects.filter(email=email)
+	resident = [ obj.account_as_json() for obj in result ]
+	vahay = resident[0]['vahay']
+
+	result2 = Vahay.objects.filter(pk=vahay.id)
+	vahayy = [ obj.details_as_json() for obj in result2 ]
+	balance = vahayy[0]['rent']
+
+	return HttpResponse(json.dumps({'balance': balance}), content_type='application/json')

@@ -5,6 +5,7 @@ import		vahay
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 
 conn = http.client.HTTPSConnection("api-uat.unionbankph.com")
@@ -14,18 +15,19 @@ def pay(sender,recipient,amount):
 	# info = json.loads(request.body)
 	# source_account = info['resident_account']
 	# amount = info['amount_due']
+	vahayy = get_object_or_404(vahay.models.Vahay, pk=recipient)
 
-	result1 = vahay.models.Resident.objects.filter(owner=sender)
+	result1 = vahay.models.Resident.objects.filter(vahay=vahayy)
 	sender = [ obj.account_as_json() for obj in result1 ]
-	sender_account = sender[0]['account_num']
+	source_account = sender[0]['account_num']
 
 	result2 = vahay.models.Vahay.objects.filter(pk=recipient)
 	recipient = [ obj.account_as_json() for obj in result2 ]
 	recipient_account = recipient[0]['account_num']
 
-	amount = recipient[0]['rent']
+	amount_pay = str(amount);
 
-	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"003\",\"source_account\":"+source_account+",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":"+amount+"}"
+	payload = "{\"channel_id\":\"VHAYAD\",\"transaction_id\":\"003\",\"source_account\":"+source_account+",\"source_currency\":\"PHP\",\"target_account\":"+recipient_account+",\"target_currency\":\"PHP\",\"amount\":"+amount_pay+"}"
 
 	headers = {
 

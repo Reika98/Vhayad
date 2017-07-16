@@ -93,7 +93,6 @@ class Resident(models.Model):
 	email = models.CharField(max_length=100)
 	account_num = models.IntegerField(default=0)
 	vahay = models.ForeignKey(Vahay, on_delete=models.CASCADE, blank=True)
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	def __str__(self):
 		return self.name;
@@ -101,7 +100,8 @@ class Resident(models.Model):
 	def account_as_json(self):
 		return {
 			"id" : self.id,
-			"account_num" : self.account_num
+			"account_num" : self.account_num,
+			"vahay": self.vahay
 		}	
 
 
