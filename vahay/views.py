@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Vahay, Resident, Transaction
-from .models import Image, Payment
+from .models import Image, Payment, Reservation
 from django.core import serializers
 
 
@@ -110,13 +110,20 @@ def reservations(request, pk):
 	if not request.user.is_authenticated:
 		return redirect('/')
 
+<<<<<<< HEAD
 	list_obj = Transaction.objects.filter(trans_type='reserve').filter(recipient=pk)
 	print list_obj.as_json()
 	# sender = get_object_or_404(Resident, pk=list_obj.)
+=======
+	vahay = get_object_or_404(Vahay, pk=pk)
+	transactions = Reservation.objects.filter(recipient=vahay)
+
+>>>>>>> 3f801ccc9142e7aeaa57d20946118c5eb13a37ef
 	context = {
-		'reservations': list_obj
+		'transactions': transactions,
 	}
-	return render(request, 'vahay/reservations.html')
+
+	return render(request, 'vahay/reservations.html', context=context)
 
 
 def approve_reservation(request, pk):
@@ -234,15 +241,3 @@ def cancel_reservation(request, pk):
 		print "GET cancel reservation"
 		return HttpResponse(json.dumps({'success':'cancelled'}), content_type='application/json')
 
-
-def get_balance(request, email):
-
-	result = Resident.objects.filter(email=email)
-	resident = [ obj.account_as_json() for obj in result ]
-	vahay = resident[0]['vahay']
-
-	result2 = Vahay.objects.filter(pk=vahay.id)
-	vahayy = [ obj.details_as_json() for obj in result2 ]
-	balance = vahayy[0]['rent']
-
-	return HttpResponse(json.dumps({'balance': balance}), content_type='application/json')

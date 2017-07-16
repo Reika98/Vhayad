@@ -91,11 +91,11 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<p><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;<strong>Address:</strong> {{ vahay.address }}</p>
 						</div>
-						<div class="col-md-2 col-md-3">
-								<a href="{% url 'vahay:reservation' %}" class="btn btn-xs btn-success">Reservations</a>
+						<div class="col-md-2 col-md-offset-3">
+								<a href="{% url 'vahay:reservations' vahay.pk %}" class="btn btn-xs btn-success">Reservations</a>
 						</div>
 					</div>
 					<div class="row">
