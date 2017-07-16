@@ -224,7 +224,7 @@ def reserve_vahay(request, email, vahayId):
 
 
 def pay_rental(request, email):
-
+	print "POST payment"
 	sender_name = email
 
 	result = Resident.objects.filter(email=sender_name)
@@ -235,7 +235,7 @@ def pay_rental(request, email):
 	recipient = vahay.id
 	trans_type = 'payment'
 	remarks = ''
-
+	print "POST payment"
 	new_transaction = Transaction.objects.create(sender=sender_id,recipient=recipient,trans_type=trans_type,remarks=remarks)
 	trans_id = new_transaction.id
 
@@ -249,7 +249,7 @@ def pay_rental(request, email):
 	amount_to_pay = payments.amount
 	payments.amount = 0
 	payments.save();
-
+	print payments.amount
 	return HttpResponse(json.dumps({'success':'yehey', 'balance': amount_to_pay}), content_type='application/json')
 
 
